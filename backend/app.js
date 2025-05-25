@@ -4,6 +4,11 @@ const express=require('express');
 const cors=require('cors');
 const app=express();
 
+const connectToDb=require('./db/db');
+const userRoutes=require('./routes/user.routes');
+
+connectToDb();
+
 app.use(cors());
 const cookieParser=require('cookie-parser');
 
@@ -16,5 +21,6 @@ app.use(cookieParser());
 app.get('/',function(req,res){
     res.send("you done it");
 });
+app.use('/users',userRoutes);
 
 module.exports=app;
